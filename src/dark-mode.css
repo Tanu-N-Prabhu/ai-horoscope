@@ -1,0 +1,97 @@
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+  }
+  
+  /* General body and dark mode styles */
+body.dark-mode .zodiac-card {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  body.dark-mode .zodiac-card-body {
+    background-color: #444;
+  }
+  
+  body:not(.dark-mode) .zodiac-card {
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  body:not(.dark-mode) .zodiac-card-body {
+    background-color: #fff;
+  }
+  
+  /* Card Layout */
+  .zodiac-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .zodiac-card-body {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .zodiac-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: inherit;
+    transition: color 0.3s ease;
+  }
+  
+  /* Hover Effect */
+  .zodiac-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .zodiac-card:hover .zodiac-title {
+    color: #007bff;
+  }
+  
+  /* Add a smooth animation for loading the cards */
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .zodiac-card {
+    animation: slide-in 0.5s ease-out forwards;
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 576px) {
+    .zodiac-title {
+      font-size: 1rem;
+    }
+  }
+  
+  /* Ensure dark mode text remains visible inside the modal */
+body.dark-mode .modal-content {
+    background-color: #1a1a1a; /* Dark background */
+    color: #ddd; /* Light text for contrast */
+  }
+  
+  body.dark-mode .modal-header, 
+  body.dark-mode .modal-footer {
+    background-color: #222; /* Slightly lighter for distinction */
+    border-color: #444; /* Subtle border color */
+  }
+  
+  body.dark-mode .modal-title {
+    color: #fff; /* Ensure title is bright */
+  }
+  
+  body.dark-mode .modal-body {
+    color: #ddd; /* Light text to remain visible */
+  }
