@@ -25,16 +25,19 @@
       ]
     },
     {
-      "version": "1.2",
+      "version": "1.2.1",
       "date": "2025-03-28",
       "changes": [
         "Improved horoscope data fetching performance",
-        "Enhanced UI styling for better user experience"
+        "Enhanced UI styling for better user experience",
+        "Added animations for the loading screen and made the horoscope page more responsive"
       ],
       "bugFixes": [
         "Resolved issue with dark mode toggle not applying immediately",
-        "Implemented Card Style, Hover Effect, Responsive Grid and Animation on Load styles to the App."
+        "Implemented Card Style, Hover Effect, Responsive Grid and Animation on Load styles to the App.",
+        "Removed the plain text that says Loading... in the page and implemented CSS to beautify it."
       ]
     }
+    
   ]
   
