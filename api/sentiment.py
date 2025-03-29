@@ -8,7 +8,7 @@ nltk.download("vader_lexicon")
 app = Flask(__name__)
 sia = SentimentIntensityAnalyzer()
 
-@app.route("/analyze", methods=["POST"])
+@app.route("/api/analyze", methods=["POST"])
 def analyze_sentiment():
     data = request.json
     text = data.get("text", "")
