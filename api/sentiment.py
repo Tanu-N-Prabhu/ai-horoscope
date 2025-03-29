@@ -1,26 +1,26 @@
 from flask import Flask, request, jsonify
-from nltk.sentiment import SentimentIntensityAnalyzer
 import nltk
-
-# Download the VADER lexicon for sentiment analysis
-nltk.download("vader_lexicon")
+from nltk.sentiment import SentimentIntensityAnalyzer
 
 app = Flask(__name__)
-sia = SentimentIntensityAnalyzer()
 
 @app.route("/api/analyze", methods=["POST"])
 def analyze_sentiment():
-    data = request.json
-    text = data.get("text", "")
+    # Ensure the lexicon is downloaded inside the function
+    nltk.download("vader_lexicon")
+    sia = SentimentIntensityAnalyzer()
 
-    print("Received text for sentiment analysis:", text)  # Log the received text
+    # Get JSON data from the request
+    data = request.get_json()
 
-    if not text:
+    if not data or "text" not in data:
         return jsonify({"error": "No text provided"}), 400
 
-    sentiment_score = sia.polarity_scores(text)["compound"]
-    print("Sentiment score:", sentiment_score)  # Log the sentiment score
+    text = data["text"]
+    print(f"Text received: {text}")  # Debugging log
 
+    sentiment_score = sia.polarity_scores(text)["compound"]
+    
     if sentiment_score >= 0.05:
         sentiment = "Positive 😊"
     elif sentiment_score <= -0.05:
@@ -28,7 +28,6 @@ def analyze_sentiment():
     else:
         sentiment = "Neutral 😐"
 
-    print("Final Sentiment:", sentiment)  # Log the sentiment result
     return jsonify({"sentiment": sentiment})
 
 if __name__ == "__main__":
