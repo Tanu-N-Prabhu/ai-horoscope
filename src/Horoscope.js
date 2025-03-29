@@ -30,11 +30,12 @@ const Horoscope = () => {
   const analyzeSentiment = (text) => {
     axios.post("https://ai-horoscope-nu.vercel.app/api/analyze", { text })
       .then(response => {
+        console.log("Sentiment response:", response.data); // Log the response for debugging
         setSentiment(response.data.sentiment);
       })
       .catch(error => console.error("Error analyzing sentiment:", error));
   };
-
+  
   if (loading) {
     return (
       <div className="centered-message">
