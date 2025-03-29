@@ -15,9 +15,12 @@ const Horoscope = () => {
         const data = response.data.find(item => item.sign.toLowerCase() === sign.toLowerCase());
         setHoroscope(data);
         
-        if (data) {
+        if (data && data.description) {
           analyzeSentiment(data.description);
+        } else {
+          console.error("Description not available.");
         }
+        
 
         setLoading(false);
       })
