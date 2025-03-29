@@ -1,34 +1,39 @@
-from flask import Flask, request, jsonify
+import os
 import nltk
+from flask import Flask, request, jsonify
 from nltk.sentiment import SentimentIntensityAnalyzer
+
+# Tell nltk to use the local nltk_data folder inside the project directory
+nltk.data.path.append(os.path.join(os.path.dirname(__file__), "nltk_data"))
+
+sia = SentimentIntensityAnalyzer()
 
 app = Flask(__name__)
 
 @app.route("/api/analyze", methods=["POST"])
 def analyze_sentiment():
-    # Ensure the lexicon is downloaded inside the function
-    nltk.download("vader_lexicon")
-    sia = SentimentIntensityAnalyzer()
+    try:
+        data = request.get_json()
+        if not data or "text" not in data:
+            return jsonify({"error": "No text provided"}), 400
 
-    # Get JSON data from the request
-    data = request.get_json()
+        text = data["text"]
+        print(f"Text received: {text}")  # Debugging log
 
-    if not data or "text" not in data:
-        return jsonify({"error": "No text provided"}), 400
+        sentiment_score = sia.polarity_scores(text)["compound"]
+        
+        if sentiment_score >= 0.05:
+            sentiment = "Positive 😊"
+        elif sentiment_score <= -0.05:
+            sentiment = "Negative 😞"
+        else:
+            sentiment = "Neutral 😐"
 
-    text = data["text"]
-    print(f"Text received: {text}")  # Debugging log
-
-    sentiment_score = sia.polarity_scores(text)["compound"]
+        return jsonify({"sentiment": sentiment})
     
-    if sentiment_score >= 0.05:
-        sentiment = "Positive 😊"
-    elif sentiment_score <= -0.05:
-        sentiment = "Negative 😞"
-    else:
-        sentiment = "Neutral 😐"
-
-    return jsonify({"sentiment": sentiment})
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": "Internal Server Error"}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
