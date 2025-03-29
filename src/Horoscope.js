@@ -28,7 +28,7 @@ const Horoscope = () => {
   }, [sign]);
   
   const analyzeSentiment = (text) => {
-    axios.post("https://ai-horoscope-nu.vercel.app/analyze", { text })
+    axios.post("https://ai-horoscope-nu.vercel.app/api/analyze", { text })
       .then(response => {
         setSentiment(response.data.sentiment);
       })
