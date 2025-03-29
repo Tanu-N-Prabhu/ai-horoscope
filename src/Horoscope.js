@@ -31,13 +31,16 @@ const Horoscope = () => {
   }, [sign]);
   
   const analyzeSentiment = (text) => {
+    console.log("Text sent for sentiment analysis:", text); // Log the text before sending
+  
     axios.post("https://ai-horoscope-nu.vercel.app/api/analyze", { text })
       .then(response => {
-        console.log("Sentiment response:", response.data); // Log the response for debugging
+        console.log("Sentiment API Response:", response.data); // Log the API response
         setSentiment(response.data.sentiment);
       })
       .catch(error => console.error("Error analyzing sentiment:", error));
   };
+  
   
   if (loading) {
     return (
