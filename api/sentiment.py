@@ -1,36 +1,35 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 from nltk.sentiment import SentimentIntensityAnalyzer
 import nltk
 
+# Download the VADER lexicon for sentiment analysis
 nltk.download("vader_lexicon")
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
 sia = SentimentIntensityAnalyzer()
 
 @app.route("/api/analyze", methods=["POST"])
 def analyze_sentiment():
-    try:
-        data = request.json
-        text = data.get("text", "")
+    data = request.json
+    text = data.get("text", "")
 
-        if not text:
-            return jsonify({"error": "No text provided"}), 400
+    print("Received text for sentiment analysis:", text)  # Log the received text
 
-        sentiment_score = sia.polarity_scores(text)["compound"]
+    if not text:
+        return jsonify({"error": "No text provided"}), 400
 
-        if sentiment_score >= 0.05:
-            sentiment = "Positive 😊"
-        elif sentiment_score <= -0.05:
-            sentiment = "Negative 😞"
-        else:
-            sentiment = "Neutral 😐"
+    sentiment_score = sia.polarity_scores(text)["compound"]
+    print("Sentiment score:", sentiment_score)  # Log the sentiment score
 
-        return jsonify({"sentiment": sentiment})
+    if sentiment_score >= 0.05:
+        sentiment = "Positive 😊"
+    elif sentiment_score <= -0.05:
+        sentiment = "Negative 😞"
+    else:
+        sentiment = "Neutral 😐"
 
-    except Exception as e:
-        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+    print("Final Sentiment:", sentiment)  # Log the sentiment result
+    return jsonify({"sentiment": sentiment})
 
 if __name__ == "__main__":
     app.run(debug=True)
