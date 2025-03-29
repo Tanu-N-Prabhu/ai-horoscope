@@ -1,16 +1,26 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "api/sentiment.py",
-        "use": "@vercel/python"
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
       }
-    ],
-    "routes": [
-      {
-        "src": "/api/analyze",
-        "dest": "/api/sentiment.py"
-      }
-    ]
-  }
-  
+    },
+    {
+      "src": "api/sentiment.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/analyze",
+      "dest": "/api/sentiment.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/build/$1"
+    }
+  ]
+}
