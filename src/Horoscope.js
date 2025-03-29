@@ -7,22 +7,33 @@ const Horoscope = () => {
   const { sign } = useParams();
   const [horoscope, setHoroscope] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [sentiment, setSentiment] = useState("");
 
   useEffect(() => {
-    axios
-      .get("https://api.aistrology.beandev.xyz/latest")
-      .then((response) => {
-        const data = response.data.find(
-          (item) => item.sign.toLowerCase() === sign.toLowerCase()
-        );
+    axios.get("https://api.aistrology.beandev.xyz/latest")
+      .then(response => {
+        const data = response.data.find(item => item.sign.toLowerCase() === sign.toLowerCase());
         setHoroscope(data);
+        
+        if (data) {
+          analyzeSentiment(data.description);
+        }
+
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("Error fetching horoscope:", error);
         setLoading(false);
       });
   }, [sign]);
+  
+  const analyzeSentiment = (text) => {
+    axios.post("http://localhost:5000/analyze", { text })
+      .then(response => {
+        setSentiment(response.data.sentiment);
+      })
+      .catch(error => console.error("Error analyzing sentiment:", error));
+  };
 
   if (loading) {
     return (
@@ -47,6 +58,7 @@ const Horoscope = () => {
       <div className="horoscope-card">
         <p><strong>Date:</strong> {horoscope.current_date}</p>
         <p><strong>Description:</strong> {horoscope.description}</p>
+        <p><strong>Sentiment:</strong> {sentiment}</p>
         <p><strong>Compatibility:</strong> {horoscope.compatibility}</p>
         <p><strong>Mood:</strong> {horoscope.mood}</p>
         <p><strong>Color:</strong> {horoscope.color}</p>
