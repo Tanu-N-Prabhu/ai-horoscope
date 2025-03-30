@@ -12,6 +12,28 @@ app = Flask(__name__)
 
 @app.route("/api/analyze", methods=["POST"])
 def analyze_sentiment():
+    data = request.json
+    text = data.get("text", "")
+
+    if not text:
+        return jsonify({"error": "No text provided"}), 400
+
+    sentiment_score = sia.polarity_scores(text)["compound"]
+
+    if sentiment_score >= 0.5:
+        sentiment = "Very Positive 😊"
+    elif sentiment_score >= 0.05:
+        sentiment = "Positive 🙂"
+    elif sentiment_score >= -0.05:
+        sentiment = "Neutral 😐"
+    elif sentiment_score >= -0.3:
+        sentiment = "Mildly Challenging 😕"
+    elif sentiment_score >= -0.5:
+        sentiment = "Room for Improvement 🙌"
+    else:
+        sentiment = "Very Challenging ⚡️"
+
+    return jsonify({"sentiment": sentiment})
     try:
         data = request.get_json()
         if not data or "text" not in data:
