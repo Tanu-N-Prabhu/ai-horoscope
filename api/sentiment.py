@@ -1,8 +1,11 @@
 import nltk
 from flask import Flask, request, jsonify
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import os
 
-# ✅ No need to download or set nltk path
+# Manually set nltk data path to local directory
+nltk.data.path.append(os.path.join(os.path.dirname(__file__), "nltk_data"))
+print(nltk.data.path)
 sia = SentimentIntensityAnalyzer()
 
 app = Flask(__name__)
