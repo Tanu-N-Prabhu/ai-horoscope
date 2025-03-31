@@ -63,13 +63,13 @@ const Home = () => {
             changelogData.map((version, index) => (
               <div key={index}>
                 <h5>Version {version.version} ({version.date})</h5>
-                <h6>Changes:</h6>
+                <h6>New Features:</h6>
                 <ul>
                   {version.changes.map((change, idx) => (
                     <li key={idx}>{change}</li>
                   ))}
                 </ul>
-                <h6>Bug Fixes:</h6>
+                <h6>Bug Fixes & Enhancements:</h6>
                 <ul>
                   {version.bugFixes.map((bug, idx) => (
                     <li key={idx}>{bug}</li>
