@@ -3,6 +3,7 @@ import './dark-mode.css';  // Import dark mode styles
 import React, { useState, useEffect } from "react";
 import { Button, Container, Row, Col, Modal } from "react-bootstrap";  // Import necessary components
 import { Link } from "react-router-dom";
+import { ChevronDown, ChevronRight } from "lucide-react"; // Import icons for expand/collapse
 import Header from "./Header"; // Import the Header component
 
 const zodiacSigns = [
@@ -14,13 +15,19 @@ const Home = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showChangelog, setShowChangelog] = useState(false);  // State for showing changelog
   const [changelogData, setChangelogData] = useState([]);  // State to hold the changelog data
+  const [expandedVersion, setExpandedVersion] = useState(null); // Track expanded changelog version
 
   useEffect(() => {
     const fetchChangelog = async () => {
       try {
         const response = await fetch("changelog.json");
         const data = await response.json();
-        setChangelogData(data);
+        console.log(data)
+        const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by latest date
+        setChangelogData(sortedData);
+        if (sortedData.length > 0) {
+          setExpandedVersion(sortedData[0].version); // Expand latest version by default
+        }
       } catch (error) {
         console.error("Error fetching changelog data:", error);
       }
@@ -37,6 +44,10 @@ const Home = () => {
 
   const handleShowChangelog = () => setShowChangelog(true);  // Show changelog
   const handleCloseChangelog = () => setShowChangelog(false); // Close changelog
+
+  const toggleVersion = (version) => {
+    setExpandedVersion(expandedVersion === version ? null : version);
+  };
 
   // Retrieve dark mode preference from localStorage
   useEffect(() => {
@@ -62,20 +73,30 @@ const Home = () => {
           {changelogData.length > 0 ? (
             changelogData.map((version, index) => (
               <div key={index}>
-                <h5>Version {version.version} ({version.date})</h5>
-                <h6>New Features:</h6>
-                <ul>
-                  {version.changes.map((change, idx) => (
-                    <li key={idx}>{change}</li>
-                  ))}
-                </ul>
-                <h6>Bug Fixes & Enhancements:</h6>
-                <ul>
-                  {version.bugFixes.map((bug, idx) => (
-                    <li key={idx}>{bug}</li>
-                  ))}
-                </ul>
-                <hr />
+                <h5 
+                  onClick={() => toggleVersion(version.version)} 
+                  style={{ cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between" }}
+                >
+                  Version {version.version} ({version.date})
+                  {expandedVersion === version.version ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
+                </h5>
+                {expandedVersion === version.version && (
+                  <>
+                    <h6>New Features:</h6>
+                    <ul style={{ textAlign: "justify" }}>
+                      {version.changes.map((change, idx) => (
+                        <li key={idx}>{change}</li>
+                      ))}
+                    </ul>
+                    <h6>Bug Fixes & Enhancements:</h6>
+                    <ul style={{ textAlign: "justify" }}>
+                      {version.bugFixes.map((bug, idx) => (
+                        <li key={idx}>{bug}</li>
+                      ))}
+                    </ul>
+                    <hr />
+                  </>
+                )}
               </div>
             ))
           ) : (
