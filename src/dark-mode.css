@@ -10,7 +10,7 @@ body.dark-mode .zodiac-card {
   }
   
   body.dark-mode .zodiac-card-body {
-    background-color: #444;
+    background-color: grey;
   }
   
   body:not(.dark-mode) .zodiac-card {
@@ -119,11 +119,5 @@ body.dark-mode .modal-content {
     object-fit: cover;  /* Ensure the image fits within the container */
   }
   
-  /* Dark Mode Styling */
-  @media (prefers-color-scheme: dark) {
-    .zodiac-card {
-      background-color: #1e1e1e;  /* Dark mode background */
-      color: #fff;  /* White text for dark mode */
-    }
-  }
+
   
