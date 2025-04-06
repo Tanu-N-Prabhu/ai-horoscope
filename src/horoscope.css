@@ -94,3 +94,60 @@
     background: #e64a19;
   }
   
+  .zodiac-icon {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+
+  @media (max-width: 600px) {
+  .horoscope-title {
+    font-size: 22px;
+  }
+
+  .zodiac-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+.center-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* optional, adjust as needed */
+  text-align: center;
+}
+
+/* Already styled */
+.zodiac-header-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* For dark mode */
+@media (prefers-color-scheme: dark) {
+  .zodiac-header-box {
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+  }
+
+  .horoscope-title {
+    color: #fff;
+  }
+}
+
+.zodiac-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.horoscope-title {
+  font-size: 28px;
+  margin: 0;
+}

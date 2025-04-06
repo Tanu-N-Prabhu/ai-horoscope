@@ -112,21 +112,29 @@ const Home = () => {
       </Modal>
 
       {/* Zodiac Signs List in Card View */}
-      <Container className="py-5">
-        <Row className="justify-content-center">
-          {zodiacSigns.map((sign) => (
-            <Col key={sign} xs={12} sm={6} md={4} lg={3} className="mb-4">
-              <Link to={`/horoscope/${sign}`} style={{ textDecoration: "none" }}>
-                <div className="zodiac-card">
-                  <div className="zodiac-card-body">
-                    <h5 className="zodiac-title">{sign.toUpperCase()}</h5>
-                  </div>
-                </div>
-              </Link>
-            </Col>
-          ))}
-        </Row>
-      </Container>
+      {/* Zodiac Signs List in Card View */}
+<Container className="py-5">
+  <Row className="justify-content-center">
+    {zodiacSigns.map((sign) => (
+      <Col key={sign} xs={12} sm={6} md={4} lg={3} className="mb-4">
+        <Link to={`/horoscope/${sign}`} style={{ textDecoration: "none" }}>
+          <div className="zodiac-card">
+            <div className="zodiac-card-body">
+              {/* Add the image dynamically based on the sign */}
+              <img
+                src={`/zodiac-icons/${sign}.png`}  // Make sure to have the images in the 'zodiac-icons' folder
+                alt={sign}
+                className="zodiac-image"  // Add a class for styling
+              />
+              <h5 className="zodiac-title">{sign.toUpperCase()}</h5>
+            </div>
+          </div>
+        </Link>
+      </Col>
+    ))}
+  </Row>
+</Container>
+
     </div>
   );
 };

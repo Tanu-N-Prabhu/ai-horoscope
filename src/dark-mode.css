@@ -95,3 +95,35 @@ body.dark-mode .modal-content {
   body.dark-mode .modal-body {
     color: #ddd; /* Light text to remain visible */
   }
+
+  .zodiac-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f0f0f0;  /* Light mode background */
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s ease; /* Smooth hover transition */
+  }
+  
+  .zodiac-card:hover {
+    transform: scale(1.05);  /* Slight zoom effect on hover */
+  }
+  
+  .zodiac-image {
+    width: 50px;  /* Set the desired size for the image */
+    height: 50px;
+    margin-bottom: 10px;  /* Space between image and title */
+    object-fit: cover;  /* Ensure the image fits within the container */
+  }
+  
+  /* Dark Mode Styling */
+  @media (prefers-color-scheme: dark) {
+    .zodiac-card {
+      background-color: #1e1e1e;  /* Dark mode background */
+      color: #fff;  /* White text for dark mode */
+    }
+  }
+  

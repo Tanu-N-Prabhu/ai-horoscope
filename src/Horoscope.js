@@ -61,7 +61,21 @@ const Horoscope = () => {
 
   return (
     <div className="horoscope-container">
-      <h2 className="horoscope-title">🔮 {horoscope.sign.toUpperCase()} Horoscope 🔮</h2>
+   <div className="center-box">
+  <div className="zodiac-header-box">
+    <img
+      src={`/zodiac-icons/${sign.toLowerCase()}.png`}
+      alt={sign}
+      className="zodiac-icon"
+    />
+    <h2 className="horoscope-title">
+      {horoscope.sign.toUpperCase()}
+    </h2>
+  </div>
+</div>
+
+
+
       <div className="horoscope-card">
         <p><strong>Date:</strong> {horoscope.current_date}</p>
         <p><strong>Description:</strong> {horoscope.description}</p>
