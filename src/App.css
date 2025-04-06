@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+/* App.css or dark-mode.css */
+.navbar {
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.dark-mode .navbar {
+  background-color: rgba(34, 34, 34, 0.85);
+}

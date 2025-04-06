@@ -25,7 +25,7 @@
     ]
   },
   {
-    "version": "1.2.1",
+    "version": "1.2",
     "date": "2025-03-28",
     "changes": [
       "Enhanced horoscope data fetching for better efficiency.",
@@ -51,5 +51,19 @@
       "React Router now correctly handles routes when refreshing specific horoscope pages, such as libra, ensuring users are redirected to the correct content.",
       "Fixed page not found error during reload by ensuring that all routes are properly mapped to the index.html file on Vercel."
     ]
-  }
+  },
+  {
+    "version": "1.4",
+    "date": "2025-04-06",
+    "changes": [
+      "Improved mobile-first design, ensuring the navbar adjusts beautifully on smaller screens.",
+      "Added smooth animations to the navbar using Framer Motion for a polished, interactive user experience.",
+      "Refined the dark/light mode toggle button with smoother transitions for a more elegant switch between modes.",
+      "Optimized the layout of the navbar buttons, preventing them from spreading across large screens on laptops and ensuring proper alignment."
+    ],
+    "bugFixes": [
+      "Fixed navbar layout issues on larger screens, ensuring the buttons stay compact and centered.",
+      "Resolved button stretching issues, which occurred when the page was viewed on wider laptop screens."
+    ]
+  }  
 ]
