@@ -20,7 +20,7 @@ const Home = () => {
   useEffect(() => {
     const fetchChangelog = async () => {
       try {
-        const response = await fetch(`changelog.json?t=${Date.now()}`);
+        const response = await fetch("changelog.json");
         const data = await response.json();
         console.log("Changelog Data Length:", data.length);
         console.log(data)
