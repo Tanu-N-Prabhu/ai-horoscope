@@ -22,6 +22,7 @@ const Home = () => {
       try {
         const response = await fetch("changelog.json");
         const data = await response.json();
+        console.log("Changelog Data Length:", data.length);
         console.log(data)
         const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by latest date
         setChangelogData(sortedData);
