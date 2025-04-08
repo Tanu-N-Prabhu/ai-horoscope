@@ -178,3 +178,74 @@ body.dark-mode .back-button:hover {
     font-size: 1rem;
   }
 }
+.breathing-exercise {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.breathing-exercise:hover {
+  background-color: #45a049;
+}
+
+.breathing-clock-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.breathing-clock-container p {
+  font-size: 18px;
+  color: #555;
+}
+
+
+.breathing-clock {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  background-color: #4caf50; /* Default color for the clock */
+  transition: background-color 0.5s ease;
+}
+
+.breathing-clock.inhale {
+  background-color: #4caf50; /* Green for inhale */
+}
+
+.breathing-clock.hold {
+  background-color: #fbc02d; /* Yellow for hold */
+}
+
+.breathing-clock.exhale {
+  background-color: #e57373; /* Red for exhale */
+}
+
+.breathing-clock span {
+  font-size: 40px; /* Increase size of the number */
+  color: white;
+  font-weight: bold;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+

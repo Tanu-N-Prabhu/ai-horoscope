@@ -16,18 +16,31 @@ const Horoscope = () => {
 
   const [timer, setTimer] = useState(0); // Timer state in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(false); // Timer running state
+  const [phase, setPhase] = useState("inhale"); // Track current phase (inhale, hold, exhale)
+  const [breathingSteps, setBreathingSteps] = useState({
+    inhale: 0,
+    hold: 0,
+    exhale: 0,
+  });
 
-  // Extract numbers from the breathing exercise string (e.g., "inhale for 4 seconds")
-  const extractBreathingTime = (breathingText) => {
-    const regex = /\d+/; // Regex to find the first number in the string
-    const match = breathingText.match(regex);
-    return match ? parseInt(match[0], 10) : 10; // Default to 10 seconds if no match
+  // Extract inhale, hold, and exhale times from the breathing exercise string
+  const extractBreathingTimes = (breathingText) => {
+    const inhaleMatch = breathingText.match(/inhale for (\d+) seconds/i);
+    const holdMatch = breathingText.match(/hold for (\d+) seconds/i);
+    const exhaleMatch = breathingText.match(/exhale for (\d+) seconds/i);
+    return {
+      inhale: inhaleMatch ? parseInt(inhaleMatch[1], 10) : 4,
+      hold: holdMatch ? parseInt(holdMatch[1], 10) : 4,
+      exhale: exhaleMatch ? parseInt(exhaleMatch[1], 10) : 4,
+    };
   };
 
   const handleTimerStart = () => {
-    const breathingDuration = extractBreathingTime(mindfulnessContent.breathingExercise);
-    setTimer(breathingDuration);
+    const { inhale, hold, exhale } = extractBreathingTimes(mindfulnessContent.breathingExercise);
+    setBreathingSteps({ inhale, hold, exhale });
     setIsTimerRunning(true);
+    setPhase("inhale");
+    setTimer(inhale); // Start with inhale phase
   };
 
   const handleTimerReset = () => {
@@ -35,20 +48,40 @@ const Horoscope = () => {
     setTimer(0);
   };
 
+
   // Timer logic
-  useEffect(() => {
-    let interval;
-    if (isTimerRunning && timer > 0) {
-      interval = setInterval(() => {
-        setTimer((prevTimer) => prevTimer - 1);
-      }, 1000);
-    } else if (timer === 0 && isTimerRunning) {
-      handleTimerReset(); // Reset when timer reaches 0
-    }
+  // useEffect(() => {
+  //   let interval;
+  //   if (isTimerRunning && timer > 0) {
+  //     interval = setInterval(() => {
+  //       setTimer((prevTimer) => prevTimer - 1);
+  //     }, 1000);
+  //   } else if (timer === 0 && isTimerRunning) {
+  //     handleTimerReset(); // Reset when timer reaches 0
+  //   }
 
-    return () => clearInterval(interval); // Cleanup interval
-  }, [isTimerRunning, timer]);
-
+  //   return () => clearInterval(interval); // Cleanup interval
+  // }, [isTimerRunning, timer]);
+    // Timer logic for transitioning between phases
+    useEffect(() => {
+      if (isTimerRunning && timer > 0) {
+        const interval = setInterval(() => {
+          setTimer((prevTimer) => prevTimer - 1);
+        }, 1000);
+        return () => clearInterval(interval); // Cleanup interval
+      } else if (timer === 0 && isTimerRunning) {
+        if (phase === "inhale") {
+          setPhase("hold");
+          setTimer(breathingSteps.hold); // Switch to hold phase
+        } else if (phase === "hold") {
+          setPhase("exhale");
+          setTimer(breathingSteps.exhale); // Switch to exhale phase
+        } else {
+          handleTimerReset(); // Reset after all phases are completed
+        }
+      }
+    }, [isTimerRunning, timer, phase, breathingSteps]);
+    
   const analyzeSentiment = useCallback((text) => {
     axios.post("https://ai-horoscope-nu.vercel.app/api/analyze", { text })
       .then(response => {
@@ -120,29 +153,25 @@ const Horoscope = () => {
 
         {/* Display the mindfulness content */}
         <div className="mindfulness-companion">
-          <h3>Mindfulness Companion</h3>
-          <p><strong>Affirmation:</strong> {mindfulnessContent.affirmation}</p>
-          <p><strong>Breathing Exercise:</strong> {mindfulnessContent.breathingExercise}</p>
-          
-          {/* Start Timer Button */}
-          <button 
-            className="breathing-exercise" 
-            onClick={handleTimerStart}
-          >
-            Start Breathing Exercise
-          </button>
+        <h3>Mindfulness Companion</h3>
+        <p><strong>Affirmation:</strong> {mindfulnessContent.affirmation}</p>
+        <p><strong>Breathing Exercise:</strong> {mindfulnessContent.breathingExercise}</p>
+        
+        {/* Start Timer Button */}
+        <button className="breathing-exercise" onClick={handleTimerStart}>Start Breathing Exercise</button>
 
-          {/* Timer Display */}
-          {isTimerRunning && (
-            <p><strong>Timer: </strong>{timer} seconds remaining</p>
-          )}
+        {/* Animated Clock */}
+        {isTimerRunning && (
+          <div className={`breathing-clock ${phase}`}></div>
+        )}
 
-          <p><strong>Music Playlist:</strong> 
-            <a href={mindfulnessContent.musicPlaylist} target="_blank" rel="noopener noreferrer">
-              Listen Here
-            </a>
-          </p>
-        </div>
+        {/* Timer Display */}
+        {isTimerRunning && <p><strong>Timer: </strong>{timer} seconds remaining</p>}
+
+        <p><strong>Music Playlist:</strong> 
+          <a href={mindfulnessContent.musicPlaylist} target="_blank" rel="noopener noreferrer">Listen Here</a>
+        </p>
+      </div>
       </div>
 
       <Link to="/">
