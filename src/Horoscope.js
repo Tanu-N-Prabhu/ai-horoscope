@@ -14,53 +14,53 @@ const Horoscope = () => {
     musicPlaylist: "",
   });
 
-  // Map sentiment to mindfulness content
-  const getMindfulnessContent = (sentiment) => {
-    switch (sentiment) {
-      case "Very Positive 😊":
-        return {
-          affirmation: "You are full of positive energy. Keep shining!",
-          breathingExercise: "Take a deep breath and relax. Inhale deeply, hold for 4 seconds, exhale for 4 seconds.",
-          musicPlaylist: "https://www.youtube.com/channel/UC8VgV6u2t-3V1f6cm3_mSxg", // Bill Withers' YouTube Channel
-        };
-      case "Positive 🙂":
-        return {
-          affirmation: "Your efforts are bringing positive results. Stay focused and keep going!",
-          breathingExercise: "Inhale for 4 seconds, hold for 4 seconds, exhale for 4 seconds. Repeat.",
-          musicPlaylist: "https://www.youtube.com/channel/UCb5Lxdp1o7nF5Kwmx8Kv_Dw", // John Mayer's YouTube Channel
-        };
-      case "Neutral 😐":
-        return {
-          affirmation: "Take a moment to reflect. Everything will fall into place.",
-          breathingExercise: "Breathe in slowly for 5 seconds, breathe out for 5 seconds. Focus on your breath.",
-          musicPlaylist: "https://www.youtube.com/watch?v=6IN9g2foTHQ", // Relaxing music by Ludovico Einaudi
-        };
-      case "Mildly Challenging 😕":
-        return {
-          affirmation: "You are strong and capable of overcoming any challenges. Take it one step at a time.",
-          breathingExercise: "Inhale deeply for 4 seconds, hold for 4 seconds, exhale for 6 seconds.",
-          musicPlaylist: "https://www.youtube.com/watch?v=8u76hJzPTpA", // Relaxing music by Hans Zimmer
-        };
-      case "Room for Improvement 🙌":
-        return {
-          affirmation: "Mistakes are lessons. Every step forward counts.",
-          breathingExercise: "Slow down your breathing. Inhale deeply for 3 seconds, exhale slowly for 5 seconds.",
-          musicPlaylist: "https://www.youtube.com/channel/UCiLjmct9H7RPw-19s63y4Gg", // Chill vibes with Bonobo
-        };
-      case "Very Challenging ⚡️":
-        return {
-          affirmation: "Stay calm, and remember that you can handle anything that comes your way.",
-          breathingExercise: "Inhale for 3 seconds, exhale for 5 seconds. Repeat 5 times to calm your mind.",
-          musicPlaylist: "https://www.youtube.com/channel/UC5rNIFyZV--K4qG45zBfbng", // Uplifting music by Alan Walker
-        };
-      default:
-        return {
-          affirmation: "Take a deep breath and stay grounded.",
-          breathingExercise: "Focus on your breath for a few moments to clear your mind.",
-          musicPlaylist: "https://www.youtube.com/channel/UCYc2XfGb_JsAby5ePf0vyeA", // Classical music by Beethoven
-        };
-    }
-  };
+  // // Map sentiment to mindfulness content
+  // const getMindfulnessContent = (sentiment) => {
+  //   switch (sentiment) {
+  //     case "Very Positive 😊":
+  //       return {
+  //         affirmation: "You are full of positive energy. Keep shining!",
+  //         breathingExercise: "Take a deep breath and relax. Inhale deeply, hold for 4 seconds, exhale for 4 seconds.",
+  //         musicPlaylist: "https://www.youtube.com/channel/UC8VgV6u2t-3V1f6cm3_mSxg", // Bill Withers' YouTube Channel
+  //       };
+  //     case "Positive 🙂":
+  //       return {
+  //         affirmation: "Your efforts are bringing positive results. Stay focused and keep going!",
+  //         breathingExercise: "Inhale for 4 seconds, hold for 4 seconds, exhale for 4 seconds. Repeat.",
+  //         musicPlaylist: "https://www.youtube.com/channel/UCb5Lxdp1o7nF5Kwmx8Kv_Dw", // John Mayer's YouTube Channel
+  //       };
+  //     case "Neutral 😐":
+  //       return {
+  //         affirmation: "Take a moment to reflect. Everything will fall into place.",
+  //         breathingExercise: "Breathe in slowly for 5 seconds, breathe out for 5 seconds. Focus on your breath.",
+  //         musicPlaylist: "https://www.youtube.com/watch?v=6IN9g2foTHQ", // Relaxing music by Ludovico Einaudi
+  //       };
+  //     case "Mildly Challenging 😕":
+  //       return {
+  //         affirmation: "You are strong and capable of overcoming any challenges. Take it one step at a time.",
+  //         breathingExercise: "Inhale deeply for 4 seconds, hold for 4 seconds, exhale for 6 seconds.",
+  //         musicPlaylist: "https://www.youtube.com/watch?v=8u76hJzPTpA", // Relaxing music by Hans Zimmer
+  //       };
+  //     case "Room for Improvement 🙌":
+  //       return {
+  //         affirmation: "Mistakes are lessons. Every step forward counts.",
+  //         breathingExercise: "Slow down your breathing. Inhale deeply for 3 seconds, exhale slowly for 5 seconds.",
+  //         musicPlaylist: "https://www.youtube.com/channel/UCiLjmct9H7RPw-19s63y4Gg", // Chill vibes with Bonobo
+  //       };
+  //     case "Very Challenging ⚡️":
+  //       return {
+  //         affirmation: "Stay calm, and remember that you can handle anything that comes your way.",
+  //         breathingExercise: "Inhale for 3 seconds, exhale for 5 seconds. Repeat 5 times to calm your mind.",
+  //         musicPlaylist: "https://www.youtube.com/channel/UC5rNIFyZV--K4qG45zBfbng", // Uplifting music by Alan Walker
+  //       };
+  //     default:
+  //       return {
+  //         affirmation: "Take a deep breath and stay grounded.",
+  //         breathingExercise: "Focus on your breath for a few moments to clear your mind.",
+  //         musicPlaylist: "https://www.youtube.com/channel/UCYc2XfGb_JsAby5ePf0vyeA", // Classical music by Beethoven
+  //       };
+  //   }
+  // };
   
   // Wrap analyzeSentiment with useCallback
   const analyzeSentiment = useCallback((text) => {
@@ -70,8 +70,16 @@ const Horoscope = () => {
       .then(response => {
         console.log("Sentiment API Response:", response.data); // Log the API response
         setSentiment(response.data.sentiment);
-        const content = getMindfulnessContent(response.data.sentiment); // Get the mindfulness content based on sentiment
-        setMindfulnessContent(content); // Set mindfulness content
+
+        //const content = getMindfulnessContent(response.data.sentiment); // Get the mindfulness content based on sentiment
+        //setMindfulnessContent(content); // Set mindfulness content
+
+        setMindfulnessContent({
+          affirmation: response.data.affirmation,
+          breathingExercise: response.data.breathing_exercise,
+          musicPlaylist: response.data.music_playlist
+        });
+        
       })
       .catch(error => console.error("Error analyzing sentiment:", error));
   }, []); // Empty dependency array so it only gets created once
