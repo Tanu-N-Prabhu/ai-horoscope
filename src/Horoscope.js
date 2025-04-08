@@ -167,6 +167,8 @@ const Horoscope = () => {
 
         {/* Timer Display */}
         {isTimerRunning && <p><strong>Timer: </strong>{timer} seconds remaining</p>}
+        <p>{phase === 'inhale' ? 'Inhale' : phase === 'hold' ? 'Hold' : 'Exhale'}</p>
+
 
         <p><strong>Music Playlist:</strong> 
           <a href={mindfulnessContent.musicPlaylist} target="_blank" rel="noopener noreferrer">Listen Here</a>

@@ -208,29 +208,24 @@ body.dark-mode .back-button:hover {
 
 
 .breathing-clock {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 24px;
   font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  border-radius: 50%;
   color: white;
-  background-color: #4caf50; /* Default color for the clock */
-  transition: background-color 0.5s ease;
 }
 
-.breathing-clock.inhale {
-  background-color: #4caf50; /* Green for inhale */
+.inhale {
+  background-color: green;
 }
 
-.breathing-clock.hold {
-  background-color: #fbc02d; /* Yellow for hold */
+.hold {
+  background-color: yellow;
 }
 
-.breathing-clock.exhale {
-  background-color: #e57373; /* Red for exhale */
+.exhale {
+  background-color: red;
 }
 
 .breathing-clock span {
