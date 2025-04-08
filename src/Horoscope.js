@@ -147,11 +147,16 @@ const Horoscope = () => {
         <p><strong>Lucky Time:</strong> {horoscope.lucky_time}</p>
 
         {/* Display the mindfulness content */}
-        <div className="mindfulness-container">
+        <div className="mindfulness-companion">
           <h3>Mindfulness Companion</h3>
           <p><strong>Affirmation:</strong> {mindfulnessContent.affirmation}</p>
           <p><strong>Breathing Exercise:</strong> {mindfulnessContent.breathingExercise}</p>
-          <p><strong>Music Playlist:</strong> <a href={mindfulnessContent.musicPlaylist} target="_blank" rel="noopener noreferrer">Listen Here</a></p>
+          <button className="breathing-exercise">Start Breathing Exercise</button>
+          <p><strong>Music Playlist:</strong> 
+          <a href={mindfulnessContent.musicPlaylist} target="_blank" rel="noopener noreferrer">
+            Listen Here
+          </a>
+          </p>
         </div>
       </div>
 
