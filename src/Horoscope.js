@@ -14,95 +14,69 @@ const Horoscope = () => {
     musicPlaylist: "",
   });
 
-  // // Map sentiment to mindfulness content
-  // const getMindfulnessContent = (sentiment) => {
-  //   switch (sentiment) {
-  //     case "Very Positive 😊":
-  //       return {
-  //         affirmation: "You are full of positive energy. Keep shining!",
-  //         breathingExercise: "Take a deep breath and relax. Inhale deeply, hold for 4 seconds, exhale for 4 seconds.",
-  //         musicPlaylist: "https://www.youtube.com/channel/UC8VgV6u2t-3V1f6cm3_mSxg", // Bill Withers' YouTube Channel
-  //       };
-  //     case "Positive 🙂":
-  //       return {
-  //         affirmation: "Your efforts are bringing positive results. Stay focused and keep going!",
-  //         breathingExercise: "Inhale for 4 seconds, hold for 4 seconds, exhale for 4 seconds. Repeat.",
-  //         musicPlaylist: "https://www.youtube.com/channel/UCb5Lxdp1o7nF5Kwmx8Kv_Dw", // John Mayer's YouTube Channel
-  //       };
-  //     case "Neutral 😐":
-  //       return {
-  //         affirmation: "Take a moment to reflect. Everything will fall into place.",
-  //         breathingExercise: "Breathe in slowly for 5 seconds, breathe out for 5 seconds. Focus on your breath.",
-  //         musicPlaylist: "https://www.youtube.com/watch?v=6IN9g2foTHQ", // Relaxing music by Ludovico Einaudi
-  //       };
-  //     case "Mildly Challenging 😕":
-  //       return {
-  //         affirmation: "You are strong and capable of overcoming any challenges. Take it one step at a time.",
-  //         breathingExercise: "Inhale deeply for 4 seconds, hold for 4 seconds, exhale for 6 seconds.",
-  //         musicPlaylist: "https://www.youtube.com/watch?v=8u76hJzPTpA", // Relaxing music by Hans Zimmer
-  //       };
-  //     case "Room for Improvement 🙌":
-  //       return {
-  //         affirmation: "Mistakes are lessons. Every step forward counts.",
-  //         breathingExercise: "Slow down your breathing. Inhale deeply for 3 seconds, exhale slowly for 5 seconds.",
-  //         musicPlaylist: "https://www.youtube.com/channel/UCiLjmct9H7RPw-19s63y4Gg", // Chill vibes with Bonobo
-  //       };
-  //     case "Very Challenging ⚡️":
-  //       return {
-  //         affirmation: "Stay calm, and remember that you can handle anything that comes your way.",
-  //         breathingExercise: "Inhale for 3 seconds, exhale for 5 seconds. Repeat 5 times to calm your mind.",
-  //         musicPlaylist: "https://www.youtube.com/channel/UC5rNIFyZV--K4qG45zBfbng", // Uplifting music by Alan Walker
-  //       };
-  //     default:
-  //       return {
-  //         affirmation: "Take a deep breath and stay grounded.",
-  //         breathingExercise: "Focus on your breath for a few moments to clear your mind.",
-  //         musicPlaylist: "https://www.youtube.com/channel/UCYc2XfGb_JsAby5ePf0vyeA", // Classical music by Beethoven
-  //       };
-  //   }
-  // };
-  
-  // Wrap analyzeSentiment with useCallback
-  const analyzeSentiment = useCallback((text) => {
-    console.log("Text sent for sentiment analysis:", text); // Log the text before sending
+  const [timer, setTimer] = useState(0); // Timer state in seconds
+  const [isTimerRunning, setIsTimerRunning] = useState(false); // Timer running state
 
+  // Extract numbers from the breathing exercise string (e.g., "inhale for 4 seconds")
+  const extractBreathingTime = (breathingText) => {
+    const regex = /\d+/; // Regex to find the first number in the string
+    const match = breathingText.match(regex);
+    return match ? parseInt(match[0], 10) : 10; // Default to 10 seconds if no match
+  };
+
+  const handleTimerStart = () => {
+    const breathingDuration = extractBreathingTime(mindfulnessContent.breathingExercise);
+    setTimer(breathingDuration);
+    setIsTimerRunning(true);
+  };
+
+  const handleTimerReset = () => {
+    setIsTimerRunning(false);
+    setTimer(0);
+  };
+
+  // Timer logic
+  useEffect(() => {
+    let interval;
+    if (isTimerRunning && timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    } else if (timer === 0 && isTimerRunning) {
+      handleTimerReset(); // Reset when timer reaches 0
+    }
+
+    return () => clearInterval(interval); // Cleanup interval
+  }, [isTimerRunning, timer]);
+
+  const analyzeSentiment = useCallback((text) => {
     axios.post("https://ai-horoscope-nu.vercel.app/api/analyze", { text })
       .then(response => {
-        console.log("Sentiment API Response:", response.data); // Log the API response
         setSentiment(response.data.sentiment);
-
-        //const content = getMindfulnessContent(response.data.sentiment); // Get the mindfulness content based on sentiment
-        //setMindfulnessContent(content); // Set mindfulness content
-
         setMindfulnessContent({
           affirmation: response.data.affirmation,
           breathingExercise: response.data.breathing_exercise,
           musicPlaylist: response.data.music_playlist
         });
-        
       })
       .catch(error => console.error("Error analyzing sentiment:", error));
-  }, []); // Empty dependency array so it only gets created once
+  }, []);
 
   useEffect(() => {
     axios.get("https://api.aistrology.beandev.xyz/latest")
       .then(response => {
         const data = response.data.find(item => item.sign.toLowerCase() === sign.toLowerCase());
         setHoroscope(data);
-        
         if (data && data.description) {
           analyzeSentiment(data.description);
-        } else {
-          console.error("Description not available.");
         }
-
         setLoading(false);
       })
       .catch(error => {
         console.error("Error fetching horoscope:", error);
         setLoading(false);
       });
-  }, [sign, analyzeSentiment]);  // No need to worry about missing dependencies anymore
+  }, [sign, analyzeSentiment]);
 
   if (loading) {
     return (
@@ -130,9 +104,7 @@ const Horoscope = () => {
             alt={sign}
             className="zodiac-icon"
           />
-          <h2 className="horoscope-title">
-            {horoscope.sign.toUpperCase()}
-          </h2>
+          <h2 className="horoscope-title">{horoscope.sign.toUpperCase()}</h2>
         </div>
       </div>
 
@@ -151,11 +123,24 @@ const Horoscope = () => {
           <h3>Mindfulness Companion</h3>
           <p><strong>Affirmation:</strong> {mindfulnessContent.affirmation}</p>
           <p><strong>Breathing Exercise:</strong> {mindfulnessContent.breathingExercise}</p>
-          <button className="breathing-exercise">Start Breathing Exercise</button>
+          
+          {/* Start Timer Button */}
+          <button 
+            className="breathing-exercise" 
+            onClick={handleTimerStart}
+          >
+            Start Breathing Exercise
+          </button>
+
+          {/* Timer Display */}
+          {isTimerRunning && (
+            <p><strong>Timer: </strong>{timer} seconds remaining</p>
+          )}
+
           <p><strong>Music Playlist:</strong> 
-          <a href={mindfulnessContent.musicPlaylist} target="_blank" rel="noopener noreferrer">
-            Listen Here
-          </a>
+            <a href={mindfulnessContent.musicPlaylist} target="_blank" rel="noopener noreferrer">
+              Listen Here
+            </a>
           </p>
         </div>
       </div>
