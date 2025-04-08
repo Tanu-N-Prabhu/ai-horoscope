@@ -21,47 +21,47 @@ const Horoscope = () => {
         return {
           affirmation: "You are full of positive energy. Keep shining!",
           breathingExercise: "Take a deep breath and relax. Inhale deeply, hold for 4 seconds, exhale for 4 seconds.",
-          musicPlaylist: "https://www.youtube.com/playlist?list=PLz2R5ZGQW8-V9c0gS8UPZGQC0uIclPjsE", // Example YouTube playlist
+          musicPlaylist: "https://www.youtube.com/channel/UC8VgV6u2t-3V1f6cm3_mSxg", // Bill Withers' YouTube Channel
         };
       case "Positive 🙂":
         return {
           affirmation: "Your efforts are bringing positive results. Stay focused and keep going!",
           breathingExercise: "Inhale for 4 seconds, hold for 4 seconds, exhale for 4 seconds. Repeat.",
-          musicPlaylist: "https://www.youtube.com/playlist?list=PLz2R5ZGQW8-VwfmFgMTeUPQdmlS0GZgl7", // Example YouTube playlist
+          musicPlaylist: "https://www.youtube.com/channel/UCb5Lxdp1o7nF5Kwmx8Kv_Dw", // John Mayer's YouTube Channel
         };
       case "Neutral 😐":
         return {
           affirmation: "Take a moment to reflect. Everything will fall into place.",
           breathingExercise: "Breathe in slowly for 5 seconds, breathe out for 5 seconds. Focus on your breath.",
-          musicPlaylist: "https://www.youtube.com/playlist?list=PLz2R5ZGQW8-Vv0JZ-Tlr1ENgf6xZtRfi2", // Example YouTube playlist
+          musicPlaylist: "https://www.youtube.com/watch?v=6IN9g2foTHQ", // Relaxing music by Ludovico Einaudi
         };
       case "Mildly Challenging 😕":
         return {
           affirmation: "You are strong and capable of overcoming any challenges. Take it one step at a time.",
           breathingExercise: "Inhale deeply for 4 seconds, hold for 4 seconds, exhale for 6 seconds.",
-          musicPlaylist: "https://www.youtube.com/playlist?list=PLz2R5ZGQW8-Vfhwd9akKGGUexgs7onmso", // Example YouTube playlist
+          musicPlaylist: "https://www.youtube.com/watch?v=8u76hJzPTpA", // Relaxing music by Hans Zimmer
         };
       case "Room for Improvement 🙌":
         return {
           affirmation: "Mistakes are lessons. Every step forward counts.",
           breathingExercise: "Slow down your breathing. Inhale deeply for 3 seconds, exhale slowly for 5 seconds.",
-          musicPlaylist: "https://www.youtube.com/playlist?list=PLz2R5ZGQW8-Vn8Fv0wKvgaDwe46jxVtLJ", // Example YouTube playlist
+          musicPlaylist: "https://www.youtube.com/channel/UCiLjmct9H7RPw-19s63y4Gg", // Chill vibes with Bonobo
         };
       case "Very Challenging ⚡️":
         return {
           affirmation: "Stay calm, and remember that you can handle anything that comes your way.",
           breathingExercise: "Inhale for 3 seconds, exhale for 5 seconds. Repeat 5 times to calm your mind.",
-          musicPlaylist: "https://www.youtube.com/playlist?list=PLz2R5ZGQW8-V6n5XybltWzL3OBLlz2iYX", // Example YouTube playlist
+          musicPlaylist: "https://www.youtube.com/channel/UC5rNIFyZV--K4qG45zBfbng", // Uplifting music by Alan Walker
         };
       default:
         return {
           affirmation: "Take a deep breath and stay grounded.",
           breathingExercise: "Focus on your breath for a few moments to clear your mind.",
-          musicPlaylist: "https://www.youtube.com/playlist?list=PLz2R5ZGQW8-VnTzWcpsPaxqppg3ISJx1Q", // Example YouTube playlist
+          musicPlaylist: "https://www.youtube.com/channel/UCYc2XfGb_JsAby5ePf0vyeA", // Classical music by Beethoven
         };
     }
   };
-
+  
   // Wrap analyzeSentiment with useCallback
   const analyzeSentiment = useCallback((text) => {
     console.log("Text sent for sentiment analysis:", text); // Log the text before sending

@@ -68,5 +68,21 @@
       "Fixed navbar layout issues on larger screens, ensuring the buttons stay compact and centered.",
       "Resolved button stretching issues, which occurred when the page was viewed on wider laptop screens."
     ]
+  },
+  {
+    "version": "1.5",
+    "date": "2025-04-08",
+    "changes": [
+      "Added a Mindfulness Companion feature that provides tailored affirmations, breathing exercises, and music suggestions based on horoscope sentiment.",
+      "Introduced a six-level sentiment analysis scale to better interpret the emotional tone of each horoscope.",
+      "Displayed sentiment descriptions on the horoscope page, dynamically updating after sentiment is analyzed.",
+      "Integrated curated YouTube playlist links for each sentiment category to enhance emotional well-being.",
+      "Updated UI to display mindfulness content clearly and cohesively under the horoscope description."
+    ],
+    "bugFixes": [
+      "Resolved an issue where some YouTube playlists were returning 'not found' errors by replacing them with working artist or playlist links.",
+      "Fixed missing dependency warning in React (`useEffect` hook) related to the `analyzeSentiment` function.",
+      "Corrected layout where breathing exercise and music were not displaying due to missing logic execution."
+    ]
   }  
 ]
