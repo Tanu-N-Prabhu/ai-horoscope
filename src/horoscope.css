@@ -244,3 +244,104 @@ body.dark-mode .back-button:hover {
   }
 }
 
+.fullscreen-breathing {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: background-color 1s ease;
+}
+
+.fullscreen-breathing.inhale {
+  background-color: #4caf50; /* green */
+}
+
+.fullscreen-breathing.hold {
+  background-color: #fdd835; /* yellow */
+}
+
+.fullscreen-breathing.exhale {
+  background-color: #f44336; /* red */
+}
+
+.breathing-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px; /* Added gap for better spacing between the circle and button */
+}
+
+.breathing-circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  animation-timing-function: ease-in-out;
+}
+
+.fullscreen-breathing.inhale .breathing-circle {
+  animation: expand 4s forwards;
+}
+
+.fullscreen-breathing.hold .breathing-circle {
+  animation: steady 4s forwards;
+}
+
+.fullscreen-breathing.exhale .breathing-circle {
+  animation: contract 4s forwards;
+}
+
+@keyframes expand {
+  from { transform: scale(1); }
+  to { transform: scale(1.5); }
+}
+
+@keyframes contract {
+  from { transform: scale(1.5); }
+  to { transform: scale(1); }
+}
+
+@keyframes steady {
+  from { transform: scale(1.5); }
+  to { transform: scale(1.5); }
+}
+
+.timer {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.breathing-phase {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 500;
+}
+
+.stop-btn {
+  margin-top: 2rem; /* Increased margin to create space between button and circle */
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.stop-btn:hover {
+  transform: scale(1.05);
+}

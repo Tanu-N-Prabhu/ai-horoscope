@@ -161,16 +161,38 @@ const Horoscope = () => {
         <button className="breathing-exercise" onClick={handleTimerStart}>Start Breathing Exercise</button>
 
         {/* Animated Clock */}
-        {isTimerRunning && (
+        {/* {isTimerRunning && (
           <div className={`breathing-clock ${phase}`}></div>
-        )}
+        )} */}
 
-        {/* Timer Display */}
-        {isTimerRunning && <p><strong>Timer: </strong>{timer} seconds remaining</p>}
-        <p>{phase === 'inhale' ? 'Inhale' : phase === 'hold' ? 'Hold' : 'Exhale'}</p>
+        
+
+        
+
+        {/* Animated Clock */}
+        {isTimerRunning && (
+  <div className={`fullscreen-breathing ${phase}`}>
+    <div className="breathing-content">
+      <div className="breathing-circle">
+        <div className="timer">{timer} sec</div>
+        <div className="breathing-phase">
+          {phase === "inhale" ? "Inhale" : phase === "hold" ? "Hold" : "Exhale"}
+        </div>
+      </div>
+      <button onClick={handleTimerReset} className="stop-btn">
+        Stop
+      </button>
+    </div>
+  </div>
+)}
 
 
-        <p><strong>Music Playlist:</strong> 
+
+
+
+
+
+        <p><strong>Music Playlist: </strong> 
           <a href={mindfulnessContent.musicPlaylist} target="_blank" rel="noopener noreferrer">Listen Here</a>
         </p>
       </div>

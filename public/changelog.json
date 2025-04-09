@@ -84,5 +84,21 @@
       "Fixed missing dependency warning in React (`useEffect` hook) related to the `analyzeSentiment` function.",
       "Corrected layout where breathing exercise and music were not displaying due to missing logic execution."
     ]
+  },
+  {
+    "version": "1.6",
+    "date": "2025-04-09",
+    "changes": [
+      "Added fullscreen responsive background color transitions for breathing phases (inhale, hold, exhale) to enhance immersion.",
+      "Implemented animated breathing circle that expands/contracts according to the current phase to mimic natural breathing patterns.",
+      "Moved timer and breathing phase text inside the animated circle for a cleaner and centered visual experience.",
+      "Ensured responsiveness of all elements (circle, text, button) across mobile, tablet, and desktop devices.",
+      "Separated and spaced the stop button from the animated circle to avoid layout overlap on expansion."
+    ],
+    "bugFixes": [
+      "Fixed layout bug where the animated circle would collide with the stop button during the inhale phase.",
+      "Adjusted text alignment within the breathing circle to remain centered and readable on all screen sizes."
+    ]
   }  
+
 ]

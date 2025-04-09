@@ -54,9 +54,9 @@ mindfulness_resources = {
             "You are a beacon of joy — never dim your glow."
         ],
         "breathing_exercises": [
-            "Take a deep breath in for 4 seconds, hold for 4 seconds, exhale for 4 seconds. Repeat 3 times.",
-            "Breathe in joy, hold it, and breathe out gratitude. Repeat slowly.",
-            "Smile as you inhale deeply, hold for 5 seconds, and exhale with peace."
+            "Inhale for 4 seconds, hold for 4 seconds, exhale for 4 seconds. Repeat 3 times.",
+            "Breathe in joy, Inhale for 3 seconds, hold for 3 seconds, and exhale out gratitude for 3 seconds. Repeat 2 times.",
+            "Smile as you inhale deeply for 5, hold for 5 seconds, and exhale for 5 seconds with peace."
         ],
         "music_playlists": [
             "https://www.youtube.com/watch?v=8hLPQISNKH8",
@@ -71,9 +71,9 @@ mindfulness_resources = {
             "Your mindset is your superpower — use it wisely."
         ],
         "breathing_exercises": [
-            "Inhale for 4 seconds, hold for 4 seconds, exhale for 4 seconds. Repeat.",
-            "Close your eyes and take three mindful breaths — slowly and deeply.",
-            "Breathe in confidence, breathe out doubt."
+            "Inhale for 4 seconds, hold for 4 seconds, exhale for 4 seconds. Repeat 3 times.",
+            "Close your eyes and take three mindful breaths, Inhale for 6 seconds, Hold for 6 seconds and exhale for 6 seconds — slowly and deeply.",
+            "Breathe in confidence, Inhale for 5 seconds, hold for 8 seconds, exhale doubt for 5 seconds."
         ],
         "music_playlists": [
             "https://www.youtube.com/watch?v=U9gY4gYft8c",
@@ -89,8 +89,8 @@ mindfulness_resources = {
         ],
         "breathing_exercises": [
             "Inhale deeply for 4 seconds, hold for 4, exhale for 4. Repeat 3 times.",
-            "Focus on your breath — nothing else matters for the next minute.",
-            "Breathe naturally and place your hand on your heart. Feel grounded."
+            "Focus on your breath, inhale for 8 seconds, hold for 5 seconds and exhale for 8 seconds — nothing else matters for the next minute.",
+            "Breathe naturally and place your hand on your heart. Feel grounded. Inhale for 3 seconds, Hold for 3 seconds and Exhale for 3 seconds. Repeat 4 times."
         ],
         "music_playlists": [
             "https://www.youtube.com/watch?v=lFcSrYw-ARY",
@@ -105,9 +105,9 @@ mindfulness_resources = {
             "You are not alone — take it one breath at a time."
         ],
         "breathing_exercises": [
-            "Box breathing: Inhale 4s, hold 4s, exhale 4s, hold 4s.",
-            "Put one hand on your chest and the other on your belly. Breathe deeply.",
-            "Inhale slowly and count your blessings as you exhale."
+            "Box breathing: Inhale 4 seconds, hold 4 seconds, exhale 4 seconds.",
+            "Put one hand on your chest and the other on your belly. Breathe deeply, Inhale 6 seconds, hold 6 seconds, exhale 6 seconds.",
+            "Inhale slowly for 5 seconds, Hold for 5 seconds and count your blessings as you exhale for 5 seconds."
         ],
         "music_playlists": [
             "https://www.youtube.com/watch?v=1ZYbU82GVz4",
@@ -122,9 +122,9 @@ mindfulness_resources = {
             "This moment doesn’t define you — your response does."
         ],
         "breathing_exercises": [
-            "Breathe in courage, breathe out fear. Repeat slowly.",
-            "Deep breathing with affirmations: 'I am safe. I am strong.'",
-            "Use 4-7-8 breathing: Inhale 4s, hold 7s, exhale 8s."
+            "Breathe in courage, breathe out fear. Inhale 4 seconds, hold 4 seconds, exhale 4 seconds.",
+            "Deep breathing. Inhale 5 seconds, hold 5 seconds, exhale 5 seconds, do with affirmations: 'I am safe. I am strong.'",
+            "Use 4-7-8 breathing: Inhale 4 seconds, hold 7 seconds, exhale 8 seconds."
         ],
         "music_playlists": [
             "https://www.youtube.com/watch?v=1ZYbU82GVz4",
